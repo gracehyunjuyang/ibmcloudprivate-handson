@@ -1,15 +1,84 @@
-# IBM Cloud Private 설치
+# IBM Cloud Private 설치 
+본 매뉴얼에서는 IBM Cloud Private을 ICP로 줄여서 칭하겠습니다.
 
 ## IBM Cloud Private CE (Community Edition) 설치하기
-전체 튜토리얼은 [Knowledge Center] (https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers_CE.html) 를 참고하시기 바랍니다.
-본 실습은 실습의 편의성을 위해 하나의 Node (Single Node)에 Kubernetes 클러스터를 한번에  
+설치 매뉴얼 전문은 [Knowledge Center] (https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers_CE.html) 를 참고하시기 바랍니다.
+본 실습은 편의성을 위해 Single Node에 Kubernetes 클러스터를 한번에 설치합니다.
+
+실습 시간 단축을 위해 Step 1 까지는 모두 구성 완료하였습니다. 
+Step 2부터 시작하시면 됩니다. Step 2 입니다!! :-)
+
+### Pre-requisite (구성 완료. SKIP)
+- Node 간 SSH 통신하도록 설정 
+- `/etc/hosts` 파일에 hostname 입력
+- 그 외 포트 설정 등 ICP 설치를 위한 환경 구성
 
 
-### Pre-requisite
-- Node 간 SSH 통신하도록 설정
-  - 본 실습은 Single Node를 
-### Step 1: Boot Node 에만 Docker를 설치하기
-Boot Node 는 Kubernetes 클러스터를 설치 / 업데이트하는 Node 입니다. Boot Node는 주로 Master Node와 함께 사용되기도 하지요. Boot Node 에만 Docker를 설치하면 나머지 노드에는 설치 스크립트를 통해 자동으로 Docker가 설치 됩니다.
+### Step 1: Boot Node 에 Docker를 설치하기 (구성 완료. SKIP)
+Boot Node 는 Kubernetes 클러스터를 설치, 업데이트하는 노드로 주로 Master Node와 함께 설치 됩니다. 
+Boot Node 에 Docker를 설치하면 나머지 노드에는 ICP 설치 과정에서 자동으로 Docker가 설치 되므로, Boot Node 에만 Docker를 설치합니다. 
+
 
 ### Step 2: 설치 환경 셋업하기
-Boot Node 는 Kubernetes 클러스터를 설치 / 업데이트하는 Node 입니다. Boot Node는 주로 Master Node와 함께 사용되기도 하지요. Boot Node 에만 Docker를 설치하면 나머지 노드에는 설치 스크립트를 통해 자동으로 Docker가 설치 됩니다.셋업하기
+1. Boot Node에 root 권한으로 로그인
+2. [Docker Hub](https://hub.docker.com/r/ibmcom/icp-inception/)로부터 IBM Cloud Private-CE 설치 이미지 다운로드.
+```
+ sudo docker pull ibmcom/icp-inception:2.1.0.3
+
+```
+
+3. ICP 설정 파일을 저장하기 위한 설치 디렉토리 생성
+ ```
+ mkdir /opt/ibm-cloud-private-ce-2.1.0.3;  \
+ cd /opt/ibm-cloud-private-ce-2.1.0.3
+ ```
+ 
+ 4. 설정 파일 압축 풀기
+ ```
+ sudo docker run -e LICENSE=accept \
+ -v "$(pwd)":/data ibmcom/icp-inception:2.1.0.3 cp -r cluster /data
+ ```
+`cluster` 디렉토리는  설치 디렉토리 안에 생성됨. `/opt` 밑에 `/opt/cluster` 와 같이 생성됨
+
+5. 클러스터를 구성하는 노드간 secure connection 생성 (이미 설정 완료!)
+
+6. `/opt/cluster/hosts` 파일에 노드의 IP 주소 입력
+<예시 파일 넣기>
+
+7. 클러스터 노드간 통신에 SSH 키를 사용하기 위해 `/opt/cluster` 폴더에 `ssh_key` 파일을 덮어씀
+```
+ sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
+ ```
+ 
+### Step 3: 클러스터 설치 옵션
+`/opt/cluster/config.yaml` 파일 설정을 통해 ICP 설치시 다양한 옵션 부여 
+
+1. 모니터링, 미터링 서비스 활성화 
+< 예시 라인 넣기!!>
+2. 로깅 서비스 활성화 
+< 예시 파일 넣기!!>
+
+3. 그 외 ... (추가하기)
+
+
+## Step 4: ICP 설치 
+1. 설치 디렉토리 내 `cluster` 폴더로 이동 
+```
+cd ./cluster
+```
+2. ICP 클러스터 설치 
+```
+sudo docker run --net=host -t -e LICENSE=accept \
+-v "$(pwd)":/installer/cluster ibmcom/icp-inception:2.1.0.3 install
+```
+
+3. 설치가 성공적으로 완료시 아래와 같이 뜹니다. 
+```
+UI URL is https://master_ip:8443 , default username/password is admin/admin
+```
+
+여기서 `master_ip`는 ICP master node의 IP 주소로, 실습 환경으로 부여받은 VM 의 IP와 같습니다. 
+
+자, 이제 나만의 Kubernetes 환경이 여러가지 관리 서비스와 함께 설치 되었습니다. 
+UI URL에 접속하여 대시보드를 둘러보세요!
+
