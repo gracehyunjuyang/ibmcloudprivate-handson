@@ -1,10 +1,12 @@
 Mounting additional disk to `var` (IBM Cloud Virtual Server)
 
 ## Check disk list using
-`dmesg | grep xvd`
+```
+dmesg | grep xvd
+```
 
 ## Creating a Primary partition
-1. `fdisk -l`
+1. ```fdisk -l```
 Use `fdisk -l` to show a list of drives and partitions on the system.
 1. Determine which disk needs to be set up. Below shows part of the output of running fdisk -l. /dev/xvdb shows one partition, /dev/xvdb1, so /dev/xvdb is not a new disk. /dev/xvdf does not show any partitions under the area whose first column is labelled "Device Boot", so it has not been set up:
 ```
@@ -45,7 +47,7 @@ Disklabel type: dos
 Disk identifier: 0x00000000
 ```
 
-3. `fdisk /dev/xvdc`
+3. ```fdisk /dev/xvdc```
 1. To create one partition that spans the entire disk, type the letter 'n' and press enter, type the letter 'p' and press enter, type the number '1' and press enter, and then press enter twice to accept the default values for the first and last cylinders. To save and exit, type the letter 'w' and press enter.
 1. `fdisk -l` Check if it is mounted.
 
