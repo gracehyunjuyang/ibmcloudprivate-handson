@@ -2,7 +2,7 @@
 본 매뉴얼에서는 IBM Cloud Private을 ICP로 줄여서 칭하겠습니다.
 
 ## IBM Cloud Private CE (Community Edition) 설치하기
-설치 매뉴얼 전문은 [Knowledge Center] (https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers_CE.html) 를 참고하시기 바랍니다.
+설치 매뉴얼 전문은 [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers_CE.html) 를 참고하시기 바랍니다.
 본 실습은 편의성을 위해 Single Node에 Kubernetes 클러스터를 한번에 설치합니다.
 
 실습 시간 단축을 위해 Step 1 까지는 모두 구성 완료하였습니다. 
