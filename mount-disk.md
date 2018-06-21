@@ -52,8 +52,8 @@ Disk identifier: 0x00000000
 fdisk /dev/xvdc
 ```
 
-1. To create one partition that spans the entire disk, type the letter 'n' and press enter, type the letter 'p' and press enter, type the number '1' and press enter, and then press enter twice to accept the default values for the first and last cylinders. To save and exit, type the letter 'w' and press enter.
-1. Check if it is mounted.
+4. To create one partition that spans the entire disk, type the letter 'n' and press enter, type the letter 'p' and press enter, type the number '1' and press enter, and then press enter twice to accept the default values for the first and last cylinders. To save and exit, type the letter 'w' and press enter.
+5. Check if it is mounted.
 ```
 fdisk -l
 ```
