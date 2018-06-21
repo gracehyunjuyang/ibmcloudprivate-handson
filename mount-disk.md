@@ -1,10 +1,11 @@
 Mounting additional disk to `var` (IBM Cloud Virtual Server)
 
-Check disk list using
+##Check disk list using
 `dmesg | grep xvd`
 
-Creating a Primary partition
-1. Use `fdisk -l` to show a list of drives and partitions on the system.
+##Creating a Primary partition
+1. `fdisk -l`
+Use `fdisk -l` to show a list of drives and partitions on the system.
 1. Determine which disk needs to be set up. Below shows part of the output of running fdisk -l. /dev/xvdb shows one partition, /dev/xvdb1, so /dev/xvdb is not a new disk. /dev/xvdf does not show any partitions under the area whose first column is labelled "Device Boot", so it has not been set up:
 ```
 Disk /dev/xvdb: 2 GiB, 2147483648 bytes, 4194304 sectors
@@ -44,43 +45,42 @@ Disklabel type: dos
 Disk identifier: 0x00000000
 ```
 
-1. `fdisk /dev/xvdc`
+3. `fdisk /dev/xvdc`
 1. To create one partition that spans the entire disk, type the letter 'n' and press enter, type the letter 'p' and press enter, type the number '1' and press enter, and then press enter twice to accept the default values for the first and last cylinders. To save and exit, type the letter 'w' and press enter.
 1. `fdisk -l` Check if it is mounted.
 
-Formatting the Partition as ext3 or ext4
+##Formatting the Partition as ext3 or ext4
 1. `mkfs.ext4 /dev/xvdc1`
 
 
-Configure `var` folder
+##Configure `var` folder
 1.  Mount the new filesystem under `/mnt`
 `mkdir /mnt/var`    
 `mount /dev/xvdc1 /mnt/var`
 
-1. Backup data in var only (not the /var directory itself)
+2. Backup data in var only (not the /var directory itself)
 `cd /var`
 `cp -ax * /mnt/var`
 
-1. Rename the /var directory after your data has been transferred successfully.
+3. Rename the /var directory after your data has been transferred successfully.
 `cd /`
 `mv var var.old`
 
-1. Make the new var directory
+4. Make the new var directory
 `mkdir var`
-1. Unmount the new partition.
+5. Unmount the new partition.
 `umount /dev/xvdc1`
-1. Remount it as /var
+6. Remount it as /var
 `mount /dev/xvdc1 /var`
 
-1. Edit `/etc/fstab` file to include the new partition, with `/var` being the mount point, so that it will be automatically mounted at boot.
+7. Edit `/etc/fstab` file to include the new partition, with `/var` being the mount point, so that it will be automatically mounted at boot.
 `vi /etc/fstab`
 `/dev/xvdc1              /var    ext4    defaults                0 0`
-1. `reboot`
-
-1. `df -h` Check if it is well mounted. (If `/var` has the specific amount of storage)
-
+8. `reboot`
+9. `df -h` Check if it is well mounted. (If `/var` has the specific amount of storage)
 
 
-Referred these links
+
+####Referred these links
 https://knowledgelayer.softlayer.com/procedure/adding-new-drive-linux
 https://unix.stackexchange.com/questions/131311/moving-var-home-to-separate-partition
