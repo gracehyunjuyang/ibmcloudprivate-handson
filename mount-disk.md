@@ -1,6 +1,6 @@
 Mounting additional disk to `var` (IBM Cloud Virtual Server)
 
-## Check disk list using
+## Check the disk list 
 ```
 dmesg | grep xvd
 ```
