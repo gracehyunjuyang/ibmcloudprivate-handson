@@ -6,8 +6,8 @@ dmesg | grep xvd
 ```
 
 ## Creating a Primary partition
-1. ```fdisk -l```
-Use `fdisk -l` to show a list of drives and partitions on the system.
+1. Use `fdisk -l` to show a list of drives and partitions on the system.
+```fdisk -l```
 1. Determine which disk needs to be set up. Below shows part of the output of running fdisk -l. /dev/xvdb shows one partition, /dev/xvdb1, so /dev/xvdb is not a new disk. /dev/xvdf does not show any partitions under the area whose first column is labelled "Device Boot", so it has not been set up:
 ```
 Disk /dev/xvdb: 2 GiB, 2147483648 bytes, 4194304 sectors
@@ -47,39 +47,53 @@ Disklabel type: dos
 Disk identifier: 0x00000000
 ```
 
-3. ```fdisk /dev/xvdc```
+3. Run the fdisk command with the name of the device as an argument. On the example system above, the command is:
+```
+fdisk /dev/xvdc
+```
+
 1. To create one partition that spans the entire disk, type the letter 'n' and press enter, type the letter 'p' and press enter, type the number '1' and press enter, and then press enter twice to accept the default values for the first and last cylinders. To save and exit, type the letter 'w' and press enter.
-1. `fdisk -l` Check if it is mounted.
+1. Check if it is mounted.
+```
+fdisk -l
+```
 
 ## Formatting the Partition as ext3 or ext4
-1. `mkfs.ext4 /dev/xvdc1`
+1. Format the partition
+```mkfs.ext4 /dev/xvdc1```
 
 
 ## Configure `var` folder
 1.  Mount the new filesystem under `/mnt`
-`mkdir /mnt/var`    
-`mount /dev/xvdc1 /mnt/var`
+```
+mkdir /mnt/var 
+mount /dev/xvdc1 /mnt/var
+```
 
 2. Backup data in var only (not the /var directory itself)
-`cd /var`
-`cp -ax * /mnt/var`
+```cd /var
+cp -ax * /mnt/var
+```
 
 3. Rename the /var directory after your data has been transferred successfully.
-`cd /`
-`mv var var.old`
+```cd /
+mv var var.old
+```
 
 4. Make the new var directory
-`mkdir var`
+```mkdir var```
 5. Unmount the new partition.
-`umount /dev/xvdc1`
+```umount /dev/xvdc1```
 6. Remount it as /var
-`mount /dev/xvdc1 /var`
+```mount /dev/xvdc1 /var```
 
 7. Edit `/etc/fstab` file to include the new partition, with `/var` being the mount point, so that it will be automatically mounted at boot.
-`vi /etc/fstab`
-`/dev/xvdc1              /var    ext4    defaults                0 0`
-8. `reboot`
-9. `df -h` Check if it is well mounted. (If `/var` has the specific amount of storage)
+```vi /etc/fstab```
+```/dev/xvdc1              /var    ext4    defaults                0 0```
+8. Reboot the machine
+```reboot```
+9. Check if it is well mounted. (If `/var` has the specific amount of storage)
+```df -h```
 
 
 
