@@ -71,7 +71,8 @@ mount /dev/xvdc1 /mnt/var
 ```
 
 2. Backup data in var only (not the /var directory itself)
-```cd /var
+```
+cd /var
 cp -ax * /mnt/var
 ```
 
@@ -81,19 +82,33 @@ mv var var.old
 ```
 
 4. Make the new var directory
-```mkdir var```
+```
+mkdir var
+```
 5. Unmount the new partition.
-```umount /dev/xvdc1```
+```
+umount /dev/xvdc1
+```
 6. Remount it as /var
-```mount /dev/xvdc1 /var```
+```
+mount /dev/xvdc1 /var
+```
 
 7. Edit `/etc/fstab` file to include the new partition, with `/var` being the mount point, so that it will be automatically mounted at boot.
-```vi /etc/fstab```
-```/dev/xvdc1              /var    ext4    defaults                0 0```
+```
+vi /etc/fstab
+```
+```
+/dev/xvdc1              /var    ext4    defaults                0 0
+```
 8. Reboot the machine
-```reboot```
+```
+reboot
+```
 9. Check if it is well mounted. (If `/var` has the specific amount of storage)
-```df -h```
+```
+df -h
+```
 
 
 
