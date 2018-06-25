@@ -43,6 +43,10 @@ Boot Node 에 Docker를 설치하면 나머지 노드에는 ICP 설치 과정에
 5. 클러스터를 구성하는 노드간 secure connection 생성 (이미 설정 완료!)
 
 6. `/opt/ibm-cloud-private-ce-2.1.0.3/cluster/hosts` 파일에 노드의 IP 주소 입력
+`vi cluster/hosts`
+`a` 입력 후 host 아래와 같이 host ip 입력`
+
+hosts 파일 수정
 ```
 [master]
 169.56.89.226
@@ -62,19 +66,26 @@ Boot Node 에 Docker를 설치하면 나머지 노드에는 ICP 설치 과정에
 
 7. 클러스터 노드간 통신에 SSH 키를 사용하기 위해 `/opt/cluster` 폴더에 `ssh_key` 파일을 덮어씀
 ```
- sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
- ```
+sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
+```
  
 ### Step 3: 클러스터 설치 옵션
-`/opt/cluster/config.yaml` 파일 설정을 통해 ICP 설치시 다양한 옵션 부여 
+`cluster/config.yaml` 파일 설정을 통해 ICP 설치시 다양한 옵션 부여 
+```
+vi cluster/config.yaml
+```
 
 1. 모니터링, 미터링 서비스 활성화 
 < 예시 라인 넣기!!>
 2. 로깅 서비스 활성화 
-< 예시 파일 넣기!!>
+```
+kibana_install: true
+``` 
+<그림>
 
 3. 그 외 ... (추가하기)
 
+------------------------ 약 15분 소요
 
 ## Step 4: ICP 설치 
 1. 설치 디렉토리 내 `cluster` 폴더로 이동 
