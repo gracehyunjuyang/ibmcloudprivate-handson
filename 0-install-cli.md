@@ -1,10 +1,10 @@
-### kubectl 설치하기
+### 1. kubectl 설치하기
 ```
 docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-inception:2.1.0.3 cp /usr/local/bin/kubectl /data
 ```
 [kubectl 링크](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html)
 
-### IBM Cloud Private CLI 설치하기
+### 2. IBM Cloud Private CLI 설치하기
 #### IBM Cloud CLI 설치
 1. tar 파일 풀기 
 ```
@@ -36,3 +36,4 @@ bx pr login -a https://<master_ip_address>:8443 --skip-ssl-validation
 
 https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html
 
+## 3. Helm CLI 설치하기
