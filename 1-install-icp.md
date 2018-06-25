@@ -42,7 +42,7 @@ Boot Node 에 Docker를 설치하면 나머지 노드에는 ICP 설치 과정에
 
 5. 클러스터를 구성하는 노드간 secure connection 생성 (이미 설정 완료!)
 
-6. `/opt/cluster/hosts` 파일에 노드의 IP 주소 입력
+6. `/opt/ibm-cloud-private-ce-2.1.0.3/cluster/hosts` 파일에 노드의 IP 주소 입력
 <예시 파일 넣기>
 
 7. 클러스터 노드간 통신에 SSH 키를 사용하기 위해 `/opt/cluster` 폴더에 `ssh_key` 파일을 덮어씀
