@@ -25,6 +25,9 @@ bx --help
 ``` 
 bx plugin install /<path_to_installer>/<cli_file_name>
 ```
+```
+bx plugin install /install/icp-linux-amd64
+```
 2. 플러그인 설치 완료 여부 확인
 ```
 bx pr --help
