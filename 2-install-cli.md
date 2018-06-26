@@ -57,23 +57,24 @@ mv helm /usr/local/bin
 
 2. kube-system 네임스페이스에 접근할 수 있도록 하는 certificate 을 제공해야 합니다. 이 때, 클러스터 관리자 (admin) 혹은 특정 사용자로  IBM Cloud Private CLI에 로그인합니다. 
    
-  1. 앞서 설치한 IBM Cloud Private CLI로 클러스터에 로그인
-  ```
-  bx pr login -a https://mycluster.icp:8443 --skip-ssl-validation
-  ```
-  여기서 `mycluster.icp` 는 곧 Master Node 의 IP주소 입니다.
-
-    클러스터 사용자 계정으로 로그인 
-    ```
-    Username > admin
-    Password > admin
-    ```
+   1. 클러스터에 관리자 계정으로 로그인 
+   ```
+   bx pr login -a https://mycluster.icp:8443 --skip-ssl-validation
+   ```
+   여기서 `mycluster.icp` 는 곧 Master Node 의 IP주소 입니다.
+ 
+   ```
+   Username > admin
+   Password > admin
+   ```
+   클러스터 사용자 계정으로 로그인
+ 
+   ```
+   Enter a number> 1
+   ```
+   클러스터 계정 선택하기
     
-    클러스터 계정 선택하기
-    ```
-    Enter a number> 1
-    ```
-  
+ 
    2. 클러스터 이름 찾기 
    ```
    bx pr clusters
