@@ -4,6 +4,7 @@ docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-incep
 ```
 [kubectl 링크](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html)
 
+
 ### 2. IBM Cloud Private CLI 설치하기
 #### 2-1 IBM Cloud CLI 설치
 1. tar 파일 풀기 
@@ -60,17 +61,27 @@ mv helm /usr/local/bin
   bx pr login -a https://mycluster.icp:8443 --skip-ssl-validation
   ```
 
-  2. 클러스터 사용자 계정으로 로그인 
+  클러스터 사용자 계정으로 로그인 
   ```
   Username > admin
   Password > admin
   ```
 
-  3. 클러스터 계정 선택하기
+  클러스터 계정 선택하기
   ```
   Enter a number> 1
   ```
-  클러스터 설정시, `cert.pem`과 `key.pem` 증명서가 `~/.helm` 디렉토리에 추가됩니다. 
+  
+  2 클러스터 이름 찾기 
+  ```
+  bx pr clusters
+  ```
+
+  3. 클러스터 설정하기 
+  ```
+  bx pr cluster-config mycluster
+  ```
+  클러스터 설정시, `cert.pem`과 `key.pem` 증명서가 `~/.helm` 디렉토리에 추가됩니다. 
 
 
 ### Helm 설치 여부 확인 
