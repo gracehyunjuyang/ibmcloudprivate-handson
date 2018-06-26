@@ -12,7 +12,8 @@ tar -xvf IBM_Cloud_CLI_0.7.1_amd64.tar.gz
 ``` 
 2. 설치 파일 실행
 ```
-./install_bluemix
+cd Bluemix_CLI/
+./install_bluemix_cli
 ```
 3. IBM Cloud CLI 설치 여부 확인 
 ```
