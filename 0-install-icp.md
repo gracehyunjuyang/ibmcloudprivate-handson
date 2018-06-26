@@ -47,7 +47,7 @@ Boot Node 에 Docker를 설치하면 나머지 노드에는 ICP 설치 과정에
  ```
  cat ~/.ssh/id_rsa.pub | sudo tee -a ~/.ssh/authorized_keys
  ```
- **본 튜토리얼은 하나의 노드만 사용하므로 더이상의 구성은 필요하지 않으나, 여러개의 노드를 사용할 경우 상호 노드 간 SSH 통신이 가능하게 해주어야 합니다. 자세한 내용은 다음 링크를 참고하세요. [Knowledge Center - SSH Key 설정하기](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/ssh_keys.html)**
+ 본 튜토리얼은 하나의 노드만 사용하므로 더이상의 구성은 필요하지 않으나, 여러개의 노드를 사용할 경우 상호 노드 간 SSH 통신이 가능하게 해주어야 합니다. 자세한 내용은 다음 링크를 참고하세요. [Knowledge Center - SSH Key 설정하기](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/ssh_keys.html)
 
  7. `/opt/ibm-cloud-private-ce-2.1.0.3/cluster/hosts` 파일에 노드의 IP 주소 입력
  
