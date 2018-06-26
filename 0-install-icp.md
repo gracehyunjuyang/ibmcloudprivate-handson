@@ -77,7 +77,7 @@ Boot Node 에 Docker를 설치하면 나머지 노드에는 ICP 설치 과정에
 ```
 sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
 ```
- 
+
 ### Step 3: 클러스터 설치 옵션
 `cluster/config.yaml` 파일 설정을 통해 ICP 설치시 다양한 옵션 부여 
 
@@ -85,17 +85,27 @@ sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
 vi cluster/config.yaml
 ```
 
-1. 모니터링, 미터링 서비스 활성화 
-< 예시 라인 넣기!!>
+1. 모니터링, 미터링 서비스는 default 로 설치하도록 명시 되어 있습니다. 만약 metering, monitoring 등의 서비스를 설치하지 않고자 할 때는 아래 `disabled_management_services` 값에 추가할 수 있습니다. 본 튜토리얼에서는 기본적인 관리 서비스 (metering, monitoring, service catalog)를 모두 설치합니다. Microservice mesh 인 Istio 도 함께 설치할 수 있습니다. 
+
+```
+## You can disable the following management services: ["service-catalog", "metering", "monitoring", "istio", "vulnerability-advisor", "custom-metrics-adapter"]
+disabled_management_services: ["istio", "vulnerability-advisor", "custom-metrics-adapter"]
+```
+
 2. 로깅 서비스 활성화 
+``` 
+# kibana_install: true
+``` 
+위와 같이 주석처리 되어 있는 로깅 서비스의 주석을 해제하여 아래와 같이 수정합니다. 
+그러면 이제 Ansible 스크립트가 실행될 때 자동으로 Kibana를 설치하게 됩니다. 
+
 ```
 kibana_install: true
 ``` 
-<그림>
 
-3. 그 외 ... (추가하기)
+3. 그 외에도 Ansible 설치 스크립트 실행시 다양한 옵션을 명시할 수 있습니다. 자세한 옵션은 [Config.yaml 파일로 클러스터 커스터마이즈 하기](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/config_yaml.html) 를 참고하시기 바랍니다. 
+ <!--https://asciinema.org/a/ycmWE0uQ06tQXZUA9yTU0eH4H-->
 
------------------------- 약 15분 소요
 
 ## Step 4: ICP 설치 
 1. 설치 디렉토리 내 `cluster` 폴더로 이동 
