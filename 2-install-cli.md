@@ -22,9 +22,6 @@ bx --help
 
 #### 2-2 IBM Cloud Private 플러그인 설치 
 1. 플러그인 설치 
-``` 
-bx plugin install /<path_to_installer>/<cli_file_name>
-```
 ```
 bx plugin install /install/icp-linux-amd64
 ```
@@ -56,6 +53,7 @@ mv helm /usr/local/bin
 
 2. kube-system 네임스페이스에 접근할 수 있도록 하는 certificate 을 제공
   2.1 IBM Cloud Private CLI로 클러스터에 로그인 
+  여기서 mycluster.icp는 곧 Master Node 의 IP주소 입니다. 
   ```
   bx pr login -a https://mycluster.icp:8443 --skip-ssl-validation
   ```
