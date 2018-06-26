@@ -33,10 +33,10 @@ bx plugin install /install/icp-linux-amd64
 bx pr --help
 ```
 
-3. 클러스터에 로그인
+<!--3. 클러스터에 로그인
 ```  
 bx pr login -a https://<master_ip_address>:8443 --skip-ssl-validation
-```
+```-->
 
 https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html
 
@@ -55,21 +55,23 @@ mv helm /usr/local/bin
 ```-->
 
 2. kube-system 네임스페이스에 접근할 수 있도록 하는 certificate 을 제공
-3.1 IBM Cloud Private CLI로 클러스터에 로그인 
-```
-bx pr login -a https://<master_ip_address>:8443 --skip-ssl-validation
-```
+  2.1 IBM Cloud Private CLI로 클러스터에 로그인 
+  ```
+  bx pr login -a https://mycluster.icp:8443 --skip-ssl-validation
+  ```
 
-3.2 클러스터 이름 찾기 
-```
-bx pr clusters
-```
+  2.2 클러스터 사용자 계정으로 로그인 
+  ```
+  Username > admin
+  Password > admin
+  ```
 
-3.3 클러스터 설정하기 
-```
-bx pr cluster-config mycluster
-```
-클러스터 설정시, `cert.pem`과 `key.pem` 증명서가 `~/.helm` 디렉토리에 추가됩니다. 
+  2.3 클러스터 계정 선택하기
+  ```
+  Enter a number> 1
+  ```
+  클러스터 설정시, `cert.pem`과 `key.pem` 증명서가 `~/.helm` 디렉토리에 추가됩니다. 
+
 
 ### Helm 설치 여부 확인 
 1. Helm CLI 초기화 
