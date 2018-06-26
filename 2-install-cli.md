@@ -1,12 +1,13 @@
-### 1. kubectl 설치하기
+## 1. kubectl 설치하기
 ```
 docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-inception:2.1.0.3 cp /usr/local/bin/kubectl /data
 ```
 [kubectl 링크](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html)
 
 
-### 2. IBM Cloud Private CLI 설치하기
-#### 2-1 IBM Cloud CLI 설치
+## 2. IBM Cloud Private CLI 설치하기
+
+### 2-1 IBM Cloud CLI 설치
 1. tar 파일 풀기 
 ```
 tar -xvf IBM_Cloud_CLI_0.7.1_amd64.tar.gz
@@ -21,7 +22,7 @@ cd Bluemix_CLI/
 bx --help
 ``` 
 
-#### 2-2 IBM Cloud Private 플러그인 설치 
+### 2-2 IBM Cloud Private 플러그인 설치 
 1. 플러그인 설치 
 ```
 bx plugin install /install/icp-linux-amd64
@@ -38,8 +39,10 @@ bx pr login -a https://<master_ip_address>:8443 --skip-ssl-validation
 
 https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html
 
+
 ## 3. Helm CLI 설치하기
 ### 3-1 Helm CLI 설치하기 
+
 1. Helm 설치 바이너리 파일 다운로드 
 ```
 docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-helm-api:1.0.0 cp /usr/src/app/public/cli/linux-amd64/helm /data
@@ -52,39 +55,39 @@ export HELM_HOME=/root/.helm
 mv helm /usr/local/bin
 ```-->
 
-2. kube-system 네임스페이스에 접근할 수 있도록 하는 certificate 을 제공  
-  
-  1. IBM Cloud Private CLI로 클러스터에 로그인 
- 
-  여기서 mycluster.icp는 곧 Master Node 의 IP주소 입니다. 
+2. kube-system 네임스페이스에 접근할 수 있도록 하는 certificate 을 제공해야 합니다. 이 때, 클러스터 관리자 (admin) 혹은 특정 사용자로  IBM Cloud Private CLI에 로그인합니다. 
+   
+  1. 앞서 설치한 IBM Cloud Private CLI로 클러스터에 로그인
   ```
   bx pr login -a https://mycluster.icp:8443 --skip-ssl-validation
   ```
+  여기서 `mycluster.icp` 는 곧 Master Node 의 IP주소 입니다.
 
-  클러스터 사용자 계정으로 로그인 
-  ```
-  Username > admin
-  Password > admin
-  ```
-
-  클러스터 계정 선택하기
-  ```
-  Enter a number> 1
-  ```
+    클러스터 사용자 계정으로 로그인 
+    ```
+    Username > admin
+    Password > admin
+    ```
+    
+    클러스터 계정 선택하기
+    ```
+    Enter a number> 1
+    ```
   
-  2 클러스터 이름 찾기 
-  ```
-  bx pr clusters
-  ```
+   2. 클러스터 이름 찾기 
+   ```
+   bx pr clusters
+   ```
+   
+   3. 클러스터 설정하기 
+   ```
+   bx pr cluster-config mycluster
+   ```
+   이렇게 클러스터를 구성하면, `cert.pem`과 `key.pem` 증명서가 `~/.helm` 디렉토리에 추가됩니다. 
 
-  3. 클러스터 설정하기 
-  ```
-  bx pr cluster-config mycluster
-  ```
-  클러스터 설정시, `cert.pem`과 `key.pem` 증명서가 `~/.helm` 디렉토리에 추가됩니다. 
 
+### 3-2 Helm CLI 설치 확인 
 
-### Helm 설치 여부 확인 
 1. Helm CLI 초기화 
 ```
 helm init --client-only
