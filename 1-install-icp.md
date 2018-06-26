@@ -46,6 +46,10 @@ Boot Node 에 Docker를 설치하면 나머지 노드에는 ICP 설치 과정에
 `vi cluster/hosts`
 `a` 입력 후 host 아래와 같이 host ip 입력`
 
+```
+vi cluster/hosts
+``` 
+
 hosts 파일 수정
 ```
 [master]
@@ -71,6 +75,7 @@ sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
  
 ### Step 3: 클러스터 설치 옵션
 `cluster/config.yaml` 파일 설정을 통해 ICP 설치시 다양한 옵션 부여 
+
 ```
 vi cluster/config.yaml
 ```
