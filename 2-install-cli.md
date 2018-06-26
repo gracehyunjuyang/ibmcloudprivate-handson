@@ -110,6 +110,6 @@ helm delete my-wordpress --purge --tls
 
 -->
 
-<a href="https://asciinema.org/a/14?autoplay=1" target="_blank"><img src="https://asciinema.org/a/czn4lLjC0ZEQYfG19d1e7MIL9.png" width="835"/></a>
+<!--https://asciinema.org/a/czn4lLjC0ZEQYfG19d1e7MIL9 -->
 
 
