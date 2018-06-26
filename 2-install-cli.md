@@ -54,7 +54,7 @@ export HELM_HOME=/root/.helm
 mv helm /usr/local/bin
 ```-->
 
-3. kube-system 네임스페이스에 접근할 수 있도록 하는 certificate 을 제공
+2. kube-system 네임스페이스에 접근할 수 있도록 하는 certificate 을 제공
 3.1 IBM Cloud Private CLI로 클러스터에 로그인 
 ```
 bx pr login -a https://<master_ip_address>:8443 --skip-ssl-validation
