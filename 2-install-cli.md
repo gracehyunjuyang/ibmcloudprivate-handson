@@ -47,11 +47,12 @@ https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/instal
 docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-helm-api:1.0.0 cp /usr/src/app/public/cli/linux-amd64/helm /data
 ```
 
-2. Helm 실행 파이너리 파일을 PATH에 추가 
+<!--Not applicable in 2.1.0.3-->
+<!--2. Helm 실행 파이너리 파일을 PATH에 추가 
 ```
 export HELM_HOME=/root/.helm
 mv helm /usr/local/bin
-```
+```-->
 
 3. kube-system 네임스페이스에 접근할 수 있도록 하는 certificate 을 제공
 3.1 IBM Cloud Private CLI로 클러스터에 로그인 
