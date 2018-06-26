@@ -81,7 +81,7 @@ helm init --client-only
 helm version --tls
 ```
 
-### Helm 사용하기 
+<!--### Helm 사용하기 
 1. Helm repository 추가  (예. Kubernetes Incubater repo)
 ```
 helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
@@ -106,6 +106,8 @@ helm list --tls
 ``` 
 helm delete my-wordpress --purge --tls
 ```
+
+-->
 
 
 
