@@ -28,7 +28,7 @@ IBM Cloud Private 에 구성된 Private Image Registry는 DockerHub와 동일한
 DockerHub 로부터 spring으로 작성된 이미지를 다운로드 후 Private Image Registry에 저장합니다.
 
 1. Spring 이미지를 DockerHub에서 로컬 머신으로  Pull 합니다. 
-[Spring.io/gs-spring-boot-docker 이미지](https://hub.docker.com/r/springio/gs-spring-boot-docker)
+[spring.io/gs-spring-boot-docker 이미지](https://hub.docker.com/r/springio/gs-spring-boot-docker)
 
 ~~~
 docker pull springio/gs-spring-boot-docker:latest
@@ -194,7 +194,7 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
    
    6. 앞서 NodePort로 들어간 것과 동일하게 보이네요.
    
-      ![Alt Ingress image](./images/image-ingress-7.png)
+   ![Alt Ingress image](./images/image-ingress-7.png)
 
    이렇게 호스트네임을 사용한 DNS 설정 뿐 아니라, ingress 설정을 통해 `proxy_ip:node_port`대신 `proxy_ip/path` 형식으로 서비스 접근을 할 수도 있습니다. 
 
