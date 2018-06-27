@@ -179,7 +179,7 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
     - Name : spring-ingress
     - Namespace : default
   - Rules
-    - Hostname : spring.<host-ip>.nip.io 
+    - Hostname : spring.[host-ip].nip.io 
     - Service name : spring-svc
     - Service port : 8080
     
@@ -190,8 +190,10 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
    4. Ingress가 생성되었습니다. 1-2분 후 Address 에 Proxy Node IP가 나타나면 Ingress 설정이 완료된 것입니다. 
       ![Alt service](./images/image-ingress-6.png)
 
-   5. 이제 지정한 HOSTNAME 을 주소창에 입력해 봅니다. 
+   5. 이제 지정한 HOSTNAME 을 주소창에 입력해 봅니다.  
+   
    6. 앞서 NodePort로 들어간 것과 동일하게 보이네요.
+   
       ![Alt Ingress image](./images/image-ingress-7.png)
 
    이렇게 호스트네임을 사용한 DNS 설정 뿐 아니라, ingress 설정을 통해 `proxy_ip:node_port`대신 `proxy_ip/path` 형식으로 서비스 접근을 할 수도 있습니다. 
