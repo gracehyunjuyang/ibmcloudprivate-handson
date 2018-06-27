@@ -80,7 +80,7 @@ Auth, Catalog, Catalogelasticsearch 등 여러개의 서비스가 Bluecompute �
   ![Alt Bluecompute](./images/bluecompute-13.png)
 
 Bluecompute 애플리케이션을 여기저기 투어해보세요. 
-각 페이지별로 서로 다른 마이크로서비스가 호출됩니다. 
+각 페이지별로 서로 다른 마이크로서비스가 호출됩니다.  (인증, 카탈로그, 재고 등)
 
   
 
