@@ -17,9 +17,9 @@ IBM Cloud Private 에 구성된 Private Image Registry는 DockerHub와 동일한
 
 * 위의 내용을 Helm 패키지로 묶어 카탈로그에 등록하고 한번에 배포하기 
   - helm cli 로 만들기 
-  - yaml 파일 생성
+  - yaml 파일 생성    
 
-
+    
 
 
 ## 1. Private Image Registry에서 이미지 관리하기 
@@ -28,7 +28,7 @@ IBM Cloud Private 에 구성된 Private Image Registry는 DockerHub와 동일한
 DockerHub 로부터 spring으로 작성된 이미지를 다운로드 후 Private Image Registry에 저장합니다.
 
 1. Spring 이미지를 DockerHub에서 로컬 머신으로  Pull 합니다. 
-[Spring.io/gs-spring-boot-docker 이미지](https://hub.docker.com/r/springio/gs-spring-boot-docker)
+[spring.io/gs-spring-boot-docker 이미지](https://hub.docker.com/r/springio/gs-spring-boot-docker)
 
 ~~~
 docker pull springio/gs-spring-boot-docker:latest
@@ -45,15 +45,17 @@ docker tag springio/gs-spring-boot-docker:latest mycluster.icp:8500/default/my-s
 ~~~
 
 4. 태그한 이미지를 Private Image Registry로 Push 합니다. 
-~~~
-docker push mycluster.icp:8500/default/my-spring-boot:0.1
-~~~
+  ~~~
+  docker push mycluster.icp:8500/default/my-spring-boot:0.1
+  ~~~ 
+  ![Alt text](./images/image-mgmt-1.png)
 
-    ![Alt text](./images/image-mgmt-1.png)
-
-5. 웹 콘솔에 admin 계정으로 로그인 후, Private Image Registry에 저장된 이미지를 확인합니다.  **메뉴 > Manage > Images** 클릭 
+5. 웹 콘솔에 admin 계정으로 로그인 후, Private Image Registry에 저장된 이미지를 확인합니다.  
+_**메뉴 > Manage > Images**_ 클릭 
     ![Alt text](./images/image-mgmt-2.png)
   저장된 이미지의 소유자는 `default` 네임스페이스이며, scope 은 해당 네임스페이스로 한정되어 있음을 확인할 수 있습니다. 
+
+
 
 ### 1-2. Private Image Registry에 저장된 이미지 가져오기 (Pull) 
 1. DockerHub와 마찬가지로 Private Image Registry에 저장된 이미지를 가져올 수도 있습니다. (Pull) 
@@ -61,6 +63,8 @@ docker push mycluster.icp:8500/default/my-spring-boot:0.1
 docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 *본 실습에서는 이미 로컬 머신에 이미지를 받은 상태이므로, 이미지가 이미 다운로드 되었다고 뜰 것입니다.*
+
+
 
 
 ### 1-3. 저장된 이미지 권한 관리하기 
@@ -72,16 +76,18 @@ docker login mycluster.icp:8500
 ~~~
 
 
-2. mynamespace에 저장된 `my-spring-boot:0.1` 을 pull 해봅니다. 
+
+
+2. `default` 네임스페이스에 저장된 `my-spring-boot:0.1` 을 pull 해봅니다. 
 ~~~
 docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
 `user1`는 `default` 라는 네임스페이스에 권한이 없기에 해당 네임스페이스에 속한 이미지를 사용할 수 없다는 메세지가 뜹니다. 
 
-```
+~~~
 Error response from daemon: Get https://mycluster.icp:8500/v2/default/my-spring-boot/manifests/0.1: unauthorized: authentication required
-```
+~~~
 
 자, 그럼 이제 이미지의 범위를 변경해 어느 namespace에서나 사용할 수 있도록 수정해보겠습니다. 
 
@@ -104,8 +110,9 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 4. 이번엔 특정 네임스페이스에 속하지 않는 글로벌 scope으로 설정 되어 있으므로 pull 이 가능한 것을 확인할 수 있습니다. 
   ![Alt text](./images/image-mgmt-5.png)
 
-
-
+  
+  
+  
 ## 2. 컨테이너 실행하기 
 - 앞서 저장한 spring 컨테이너 이미지를 사용해 간단한 컨테이너를 Deployment 형태로 실행 
 - Deployment를 접근 가능하도록 하기 위해 Service 를 NodePort로 생성 
@@ -132,7 +139,7 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 
 3. Create 버튼 클릭 
 
-### 2-2. Deployment를 외부로 노출하기 위한 Service 생성 
+### 2-2. 해당 애플리케이션에 접근하기 위한 NodePort Service 생성 
 
 1. **메뉴 > Network Access > Services** 클릭 
 2. 우측 상단의 **Create Service** 클릭하여 Service 생성 
@@ -161,6 +168,10 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
     ![Alt service](./images/image-deploy-5.png)
 
   ### 2-3. Ingress 설정하기
+  
+  Kubernetes에서는 Service 를 사용해 Pod에 접근합니다. 
+  Service와 함께 **Ingress** 를 사용해 클러스터 서비스로 들어오는 인바운드 연결에 대한 규칙을 설정할 수도 있습니다. 
+  이  외부에서 접근 가능한 URL
   1. 웹 콘솔에서 **메뉴 > ddd > Services** 클릭
   2. Services 화면에서 **Ingress** 탭 클릭
   3. **Create Ingress** 버튼 클릭해 Ingress rule 생성
@@ -168,7 +179,7 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
     - Name : spring-ingress
     - Namespace : default
   - Rules
-    - Hostname : spring.<host-ip>.nip.io 
+    - Hostname : spring.[host-ip].nip.io 
     - Service name : spring-svc
     - Service port : 8080
     
@@ -180,15 +191,15 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
       ![Alt service](./images/image-ingress-6.png)
 
    5. 이제 지정한 HOSTNAME 을 주소창에 입력해 봅니다.  
-   6. 앞서 NodePort로 들어간 것과 동일하게 보이네요! 
-      ![Alt service](./images/image-ingress-7.png)
+   
+   6. 앞서 NodePort로 들어간 것과 동일하게 보이네요.
+   
+   ![Alt Ingress image](./images/image-ingress-7.png)
 
    이렇게 호스트네임을 사용한 DNS 설정 뿐 아니라, ingress 설정을 통해 `proxy_ip:node_port`대신 `proxy_ip/path` 형식으로 서비스 접근을 할 수도 있습니다. 
 
-
+<!--
 ## 3. 앞에 실행했던 내용은 Helm 패키지로 묶어 카탈로그에 업로드 하기 
-
-
 
 
 1.  사용자 생성 
@@ -199,3 +210,5 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 - Deployment로 만들기 
 - Service 만들기 
 - Ingress 만들기 
+
+-->
