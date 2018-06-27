@@ -46,7 +46,7 @@ docker tag springio/gs-spring-boot-docker:latest mycluster.icp:8500/default/my-s
 ~~~
 docker push mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
-<이미지>
+
 ![Alt text](./images/image-mgmt-1.png)
 
 5. 웹 콘솔에 admin 계정으로 로그인 후, Private Image Registry에 저장된 이미지를 확인합니다.  * 메뉴 > Manage > Images * 클릭 
