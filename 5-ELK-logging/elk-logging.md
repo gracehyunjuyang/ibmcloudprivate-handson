@@ -17,10 +17,10 @@ IBM Cloud Private에서는 다음 두가지 타입으로 오픈소스인 ELK Sta
 ![Alt elk log](./images/elk-log-2.png)
 
 4. 가시성을 위해 Column 필드 설정.  왼쪽 **Available Fields** 에서 아래 필드 선택 후 **add** 클릭 
-- node.hostname (호스팅되는 노드)
-- kubernetes.pod (로그 생성 pod)
-- kubernetes.container_name (로그 생성 컨테이너 이름)
-- log (생성된 로그)
+- _**node.hostname**_ (호스팅되는 노드)
+- _**kubernetes.pod**_ (로그 생성 pod)
+- _**kubernetes.container_name**_ (로그 생성 컨테이너 이름)
+- _**log**_ (생성된 로그)
 
 ![Alt elk log](./images/elk-log-7.png)
 
@@ -58,20 +58,20 @@ IBM Cloud Private에서는 다음 두가지 타입으로 오픈소스인 ELK Sta
 ![Alt elk log](./images/elk-log-17.png)
 
 15. 첫 번째 bucket 생성
-- Select buckets type : Split Slices 
-- Aggregation : Terms
-- Field : kubernetes.pod.keyword
-- Size : 10
+- Select buckets type : _**Split Slices**_
+- Aggregation : _**Terms**_
+- Field : _**kubernetes.pod.keyword**_
+- Size : _**10**_
 
 ![Alt elk log](./images/elk-log-19.png)
 
 16. 아래 **Add sub-buckets** 버튼 클릭
-- Select Sub buckets type : Split Slices
-- Sub Aggregation : Terms
-- Field : kubernetes.container_name:keyword
-- Order By : metric: Count
-- Order : Descending 
-- Size : 5
+- Select Sub buckets type : _**Split Slices**_
+- Sub Aggregation : _**Terms**_
+- Field : _**kubernetes.container_name:keyword**_
+- Order By : _**metric: Count**_
+- Order : _**Descending**_
+- Size : _**5**_
 
 ![Alt elk log](./images/elk-log-20.png)
 
