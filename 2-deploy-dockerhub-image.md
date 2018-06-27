@@ -7,17 +7,17 @@ IBM Cloud Private 에 구성된 Private Image Registry는 DockerHub와 동일한
 
 
 * 이미지 관리
-- DockerHub에 있는 Public 이미지를 Private Image Registry 에 저장 (Push)
-- Private Image Registry 내 이미지 관리 (사용자 권한별, Namespace 별)
+  - DockerHub에 있는 Public 이미지를 Private Image Registry 에 저장 (Push)
+  - Private Image Registry 내 이미지 관리 (사용자 권한별, Namespace 별)
 
 * 이미지 사용하기 
-- Deployment 생성 
-- Service 생성 
-- 추가 => Ingress 생성해 보다 편하게 service 사용 
+  - Deployment 생성 
+  - Service 생성 
+  - 추가 => Ingress 생성해 보다 편하게 service 사용 
 
 * 위의 내용을 Helm 패키지로 묶어 카탈로그에 등록하고 한번에 배포하기 
-- helm cli 로 만들기 
-- yaml 파일 생성
+  - helm cli 로 만들기 
+  - yaml 파일 생성
 
 
 
@@ -32,19 +32,19 @@ DockerHub 로부터 spring으로 작성된 이미지를 다운로드 후 Private
 docker pull springio/gs-spring-boot-docker:latest
 ~~~
 
-2. Private Image Registry에 `user1` 으로 로그인합니다. 
+2. Private Image Registry에 `admin` 계정으로 로그인합니다. 
 ~~~
-docker login mycluster.icp:8500 -u user1 -p admin
+docker login mycluster.icp:8500 -u admin -p admin
 ~~~
 
-3. Pull 해온 이미지를 Docker의 네이밍 컨벤션에 따라 태그합니다: `mycluster.icp:8500/mynamespace/image_name:image_tag`
+3. Pull 해온 이미지를 Docker의 네이밍 컨벤션에 따라 태그합니다: `mycluster.icp:8500/namespace_name/image_name:image_tag`
 ~~~
 docker tag spring.io/gs-spring-boot-docker:latest mycluster.icp:8500/mynamespace/my-spring-boot:0.1
 ~~~
 
 4. 태그한 이미지를 Private Image Registry로 Push 합니다. 
 ~~~
-docker push mycluster.icp:8500/mynamespace/my-spring-boot:0.1
+docker push mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
 5. Private Image Registry에 저장된 이미지를 웹 콘솔에서 확인합니다. 메뉴 > > Images 클릭 
@@ -53,20 +53,21 @@ docker push mycluster.icp:8500/mynamespace/my-spring-boot:0.1
 ### Private Image Registry에 저장된 이미지 가져오기 (Pull) 
 1. DockerHub와 마찬가지로 Private Image Registry에 저장된 이미지를 가져올 수 있습니다. (Pull) 
 ~~~
-docker pull mycluster.icp:8500/mynamespace/my-spring-boot:0.1
+docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
 
 
 ### 저장된 이미지 권한 관리하기 
-1. Private Image Registry에 `ùser2`로  로그인합니다. 
+1. Private Image Registry에 `user1`로  로그인합니다. `user`은 `mynamespace` 에만 권한을 가지고 있습니다. 
 ~~~
-docker login mycluster.icp:8500 -u user2 -p admin
+docker login mycluster.icp:8500 -u user1 -p admin
 ~~~
+
 
 2. mynamespace에 저장된 my-spring-boot:0.1 을 pull 해봅니다. 
 ~~~
-docker pull mycluster.icp:8500/mynamespace/my-spring-boot:0.1
+docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
 user2는 mynamespace 라는 네임스페이스에 권한이 없기에 이미지를 사용 / 접근할 수  
@@ -79,7 +80,7 @@ user2는 mynamespace 라는 네임스페이스에 권한이 없기에 이미지�
 
 3. user2가 다시 이미지를 pull 해봅니다. 
 ~~~
-docker pull mycluster.icp:8500/mynamespace/my-spring-boot:0.1
+docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
 4. 이번엔 특정 네임스페이스에 속하지 않는 글로벌 scope으로 설정 되어 있으므로 pull 이 가능합니다. 
@@ -98,7 +99,7 @@ docker pull mycluster.icp:8500/mynamespace/my-spring-boot:0.1
 2. 우측 상단의 `Create Deployment` 클릭하여 Deployment 생성 
 - General 탭에 내용 입력 
   - Name : spring
-  - Namespace : default (앞서 이미지 scope을 global로 변경했으므로 어떤 namespace 에서나 사용 가능)
+  - Namespace : mynamespace (앞서 이미지 scope을 global로 변경했으므로 어떤 namespace 에서나 사용 가능)
   - Replicas : 1
   
 - Container settings 탭에 값 입력 
