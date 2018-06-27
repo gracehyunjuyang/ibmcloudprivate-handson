@@ -49,10 +49,10 @@ docker tag springio/gs-spring-boot-docker:latest mycluster.icp:8500/default/my-s
 docker push mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
-![Alt text](./images/image-mgmt-1.png)
+    ![Alt text](./images/image-mgmt-1.png)
 
 5. 웹 콘솔에 admin 계정으로 로그인 후, Private Image Registry에 저장된 이미지를 확인합니다.  **메뉴 > Manage > Images** 클릭 
-![Alt text](./images/image-mgmt-2.png)
+    ![Alt text](./images/image-mgmt-2.png)
   저장된 이미지의 소유자는 `default` 네임스페이스이며, scope 은 해당 네임스페이스로 한정되어 있음을 확인할 수 있습니다. 
 
 ### 1-2. Private Image Registry에 저장된 이미지 가져오기 (Pull) 
@@ -91,9 +91,9 @@ Error response from daemon: Get https://mycluster.icp:8500/v2/default/my-spring-
 1. 웹 콘솔에 admin 계정으로 접속해 **메뉴 > Management > Images** 클릭 
 
 2. **해당 이미지의 Action 클릭 > Change Scope > global** 로 수정 
-![Alt text](./images/image-mgmt-3.png)
+  ![Alt text](./images/image-mgmt-3.png)
 
-![Alt text](./images/image-mgmt-4.png)
+  ![Alt text](./images/image-mgmt-4.png)
 
 
 3. user2로 로그인 된 상태에서 다시 이미지를 pull 해봅니다. 
@@ -102,7 +102,7 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
 4. 이번엔 특정 네임스페이스에 속하지 않는 글로벌 scope으로 설정 되어 있으므로 pull 이 가능한 것을 확인할 수 있습니다. 
-![Alt text](./images/image-mgmt-5.png)
+  ![Alt text](./images/image-mgmt-5.png)
 
 
 
@@ -152,11 +152,13 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 
 3. **Create** 버튼 클릭 
 4. 생성된 서비스 클릭
-![Alt service](./images/image-deploy-3.png)
+    ![Alt service](./images/image-deploy-3.png)
 
 5. Service details 정보에서 Node port 란에 할당된 포트 번호 확인 가능. 해당 포트 번호를 클릭시 Spring 애플리케이션 접속 
-![Alt service](./images/image-deploy-4.png)
-![Alt service](./images/image-deploy-5.png)
+    ![Alt service](./images/image-deploy-4.png)
+    
+    
+    ![Alt service](./images/image-deploy-5.png)
 
   ### 2-3. Ingress 설정하기
   1. 웹 콘솔에서 **메뉴 > ddd > Services** 클릭
@@ -177,11 +179,12 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
    4. Ingress가 생성되었습니다. 1-2분 후 Address 에 Proxy Node IP가 나타나면 Ingress 설정이 완료된 것입니다. 
       ![Alt service](./images/image-ingress-6.png)
 
-   5. 이제 지정한 HOSTNAME 을 주소창에 입력해 봅니다. 
+   5. 이제 지정한 HOSTNAME 을 주소창에 입력해 봅니다.  
    6. 앞서 NodePort로 들어간 것과 동일하게 보이네요! 
-   ![Alt service](./images/image-ingress-7.png)
+      ![Alt service](./images/image-ingress-7.png)
 
    이렇게 호스트네임을 사용한 DNS 설정 뿐 아니라, ingress 설정을 통해 `proxy_ip:node_port`대신 `proxy_ip/path` 형식으로 서비스 접근을 할 수도 있습니다. 
+
 
 ## 3. 앞에 실행했던 내용은 Helm 패키지로 묶어 카탈로그에 업로드 하기 
 
