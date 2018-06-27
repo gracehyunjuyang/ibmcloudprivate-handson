@@ -32,36 +32,40 @@ DockerHub 로부터 spring으로 작성된 이미지를 다운로드 후 Private
 docker pull springio/gs-spring-boot-docker:latest
 ~~~
 
-2. Private Image Registry에 `admin` 계정으로 로그인합니다. 
+2. Private Image Registry에 `admin` 계정으로 로그인합니다.  (Username: admin / Password: admin)
 ~~~
-docker login mycluster.icp:8500 -u admin -p admin
+docker login mycluster.icp:8500
 ~~~
 
 3. Pull 해온 이미지를 Docker의 네이밍 컨벤션에 따라 태그합니다: `mycluster.icp:8500/namespace_name/image_name:image_tag`
 ~~~
-docker tag spring.io/gs-spring-boot-docker:latest mycluster.icp:8500/mynamespace/my-spring-boot:0.1
+docker tag springio/gs-spring-boot-docker:latest mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
 4. 태그한 이미지를 Private Image Registry로 Push 합니다. 
 ~~~
 docker push mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
+<이미지>
+![Alt text](./image-mgmt-1.png)
 
-5. Private Image Registry에 저장된 이미지를 웹 콘솔에서 확인합니다. 메뉴 > > Images 클릭 
-
+5. 웹 콘솔에 admin 계정으로 로그인 후, Private Image Registry에 저장된 이미지를 확인합니다.  * 메뉴 > Manage > Images * 클릭 
+![Alt text](./image-mgmt-2.png)
+  저장된 이미지의 소유자는 `default` 네임스페이스이며, scope 은 해당 네임스페이스로 한정되어 있음을 확인할 수 있습니다. 
 
 ### Private Image Registry에 저장된 이미지 가져오기 (Pull) 
-1. DockerHub와 마찬가지로 Private Image Registry에 저장된 이미지를 가져올 수 있습니다. (Pull) 
+1. DockerHub와 마찬가지로 Private Image Registry에 저장된 이미지를 가져올 수도 있습니다. (Pull) 
 ~~~
 docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
-
+* 본 실습에서는 이미 로컬 머신에 이미지를 받은 상태이므로, 새롭게 이미지를 받지는 않습니다.  
 
 
 ### 저장된 이미지 권한 관리하기 
-1. Private Image Registry에 `user1`로  로그인합니다. `user`은 `mynamespace` 에만 권한을 가지고 있습니다. 
+1. Private Image Registry에 `user1`로  로그인합니다. `user1`은 `mynamespace` 에만 권한을 가지고 있습니다.  (Username: user1 / Password: admin)
+
 ~~~
-docker login mycluster.icp:8500 -u user1 -p admin
+docker login mycluster.icp:8500
 ~~~
 
 
@@ -70,13 +74,19 @@ docker login mycluster.icp:8500 -u user1 -p admin
 docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
-user2는 mynamespace 라는 네임스페이스에 권한이 없기에 이미지를 사용 / 접근할 수  
+user2는 mynamespace 라는 네임스페이스에 권한이 없기에 해당 네임스페이스에 속한 이미지를 사용할 수 없다는 메세지가 뜹니다. 
+`Error response from daemon: Get https://mycluster.icp:8500/v2/default/my-spring-boot/manifests/0.1: unauthorized: authentication required`
+
+그럼 이제 이미지의 범위를 변경해 어느 namespace에서나 사용할 수 있도록 수정해보겠습니다. 
 
 
-### 이미지의 scope 을 변경해 어느 사용자나 사용할 수 있도록 수정하기 
-1. 웹 콘솔에 접속해 00 > Images 클릭 
+### 이미지의 scope 을 `global` 로 변경하기  
+1. 웹 콘솔에 admin 계정으로 접속해 *메뉴 > Management > Images* 클릭 
 
-2. 설정 > global로 수정 
+2. *해당 이미지의 Action 클릭 > Change Scope > global`로 수정 
+![Alt text](./image-mgmt-3.png)
+![Alt text](./image-mgmt-4.png)
+
 
 3. user2가 다시 이미지를 pull 해봅니다. 
 ~~~
@@ -84,8 +94,7 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
 4. 이번엔 특정 네임스페이스에 속하지 않는 글로벌 scope으로 설정 되어 있으므로 pull 이 가능합니다. 
-
-
+![Alt text](./image-mgmt-5.png)
 
 ## 저장한 이미지를 사용해 컨테이너 실행하기 
 - 앞서 저장한 spring 컨테이너 이미지를 사용해 간단한 컨테이너를 Deployment 형태로 실행 
