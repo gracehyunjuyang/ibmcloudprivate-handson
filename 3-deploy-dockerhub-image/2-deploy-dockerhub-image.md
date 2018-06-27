@@ -118,12 +118,16 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 2. 우측 상단의 **Create Deployment** 클릭하여 Deployment 생성 
 - General 탭에 내용 입력 
   - Name : spring
-  - Namespace : mynamespace (앞서 이미지 scope을 global로 변경했으므로 어느 namespace 에서나 사용 가능)
+  - Namespace : default 
   - Replicas : 1
+  
+- Labels 탭에 입력 
+  - Label : app
+  - Value : spring
   
 - Container settings 탭에 값 입력 
   - Name : spring
-  - Image : mycluster.icp:8500/mynamespace/my-spring-boot:0.1 (Public DockerHub 이미지 사용하는 것도 가능)
+  - Image : mycluster.icp:8500/default/my-spring-boot:0.1 (Public DockerHub 이미지 사용하는 것도 가능)
   - Container port : 8080
 
 3. Create 버튼 클릭 
