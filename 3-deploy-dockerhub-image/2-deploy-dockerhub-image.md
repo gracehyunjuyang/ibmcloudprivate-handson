@@ -47,7 +47,7 @@ docker tag springio/gs-spring-boot-docker:latest mycluster.icp:8500/default/my-s
 docker push mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 <이미지>
-![Alt text](./image-mgmt-1.png)
+![Alt text](./images/image-mgmt-1.png)
 
 5. 웹 콘솔에 admin 계정으로 로그인 후, Private Image Registry에 저장된 이미지를 확인합니다.  * 메뉴 > Manage > Images * 클릭 
 ![Alt text](./image-mgmt-2.png)
@@ -84,8 +84,8 @@ user2는 mynamespace 라는 네임스페이스에 권한이 없기에 해당 네
 1. 웹 콘솔에 admin 계정으로 접속해 *메뉴 > Management > Images* 클릭 
 
 2. *해당 이미지의 Action 클릭 > Change Scope > global`로 수정 
-![Alt text](./image-mgmt-3.png)
-![Alt text](./image-mgmt-4.png)
+![Alt text](./images/image-mgmt-3.png)
+![Alt text](./images/image-mgmt-4.png)
 
 
 3. user2가 다시 이미지를 pull 해봅니다. 
@@ -94,7 +94,7 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 ~~~
 
 4. 이번엔 특정 네임스페이스에 속하지 않는 글로벌 scope으로 설정 되어 있으므로 pull 이 가능합니다. 
-![Alt text](./image-mgmt-5.png)
+![Alt text](./images/image-mgmt-5.png)
 
 ## 저장한 이미지를 사용해 컨테이너 실행하기 
 - 앞서 저장한 spring 컨테이너 이미지를 사용해 간단한 컨테이너를 Deployment 형태로 실행 
