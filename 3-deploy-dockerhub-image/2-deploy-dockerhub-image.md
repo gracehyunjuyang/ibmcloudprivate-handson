@@ -134,25 +134,54 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 
 ### 2-2. Deployment를 외부로 노출하기 위한 Service 생성 
 
-1. 메뉴 > Network Access > Services 클릭 
-2. 우측 상단의 `Create Service` 클릭하여 Service 생성 
+1. **메뉴 > Network Access > Services** 클릭 
+2. 우측 상단의 **Create Service** 클릭하여 Service 생성 
 - General 탭에 내용 입력 
   - Name : spring-svc
   - Namespace : default 
   - Type : NodePort
+
 - Ports
   - Protocol : TCP
-  - Name : http 
+  - Name : http
   - Port : 8080
-  - TargetPort : 8080
+  
+- Selectors 탭에 값 입력
+  - Selector : app
+  - Value : spring
 
-3. Create 버튼 클릭 
+3. **Create** 버튼 클릭 
 4. 생성된 서비스 클릭
-5. Service details 정보에서 Node port 란에 할당된 포트 번호 확인 가능. 해당 포트 번호를 클릭
+![Alt service](./images/image-deploy-3.png)
+
+5. Service details 정보에서 Node port 란에 할당된 포트 번호 확인 가능. 해당 포트 번호를 클릭시 Spring 애플리케이션 접속 
+![Alt service](./images/image-deploy-4.png)
+![Alt service](./images/image-deploy-5.png)
+
+  ### 2-3. Ingress 설정하기
+  1. 웹 콘솔에서 **메뉴 > ddd > Services** 클릭
+  2. Services 화면에서 **Ingress** 탭 클릭
+  3. **Create Ingress** 버튼 클릭해 Ingress rule 생성
+  - General
+    - Name : spring-ingress
+    - Namespace : default
+  - Rules
+    - Hostname : spring.<host-ip>.nip.io 
+    - Service name : spring-svc
+    - Service port : 8080
+    
+    도메인 이름이 있으면 Hostname 에 도메인을 입력하면  되나, 저희는 테스트 용도로 많이 사용되는 `nip.io`를 대안으로 사용하였습니다.
+    저는 마스터 겸 프록시 노드의 IP가 10.10.80.117 이므로 `spring.10.10.80.117.nip.io` 로 입력했습니다. 
 
 
-### 2-3. Ingress 설정하기 
+   4. Ingress가 생성되었습니다. 1-2분 후 Address 에 Proxy Node IP가 나타나면 Ingress 설정이 완료된 것입니다. 
+      ![Alt service](./images/image-ingress-6.png)
 
+   5. 이제 지정한 HOSTNAME 을 주소창에 입력해 봅니다. 
+   6. 앞서 NodePort로 들어간 것과 동일하게 보이네요! 
+   ![Alt service](./images/image-ingress-7.png)
+
+   이렇게 호스트네임을 사용한 DNS 설정 뿐 아니라, ingress 설정을 통해 `proxy_ip:node_port`대신 `proxy_ip/path` 형식으로 서비스 접근을 할 수도 있습니다. 
 
 ## 3. 앞에 실행했던 내용은 Helm 패키지로 묶어 카탈로그에 업로드 하기 
 
