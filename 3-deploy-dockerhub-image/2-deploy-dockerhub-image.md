@@ -21,8 +21,10 @@ IBM Cloud Private 에 구성된 Private Image Registry는 DockerHub와 동일한
 
 
 
-## Private Image Registry에서 이미지 관리하기 
-### DockerHub에 있는 Public 이미지를 Private Image Registry에 저장(Push)
+
+## 1. Private Image Registry에서 이미지 관리하기 
+
+### 1-1. DockerHub에 있는 Public 이미지를 Private Image Registry에 저장(Push)
 DockerHub 로부터 spring으로 작성된 이미지를 다운로드 후 Private Image Registry에 저장합니다.
 
 1. Spring 이미지를 DockerHub에서 로컬 머신으로  Pull 합니다. 
@@ -53,7 +55,7 @@ docker push mycluster.icp:8500/default/my-spring-boot:0.1
 ![Alt text](./image-mgmt-2.png)
   저장된 이미지의 소유자는 `default` 네임스페이스이며, scope 은 해당 네임스페이스로 한정되어 있음을 확인할 수 있습니다. 
 
-### Private Image Registry에 저장된 이미지 가져오기 (Pull) 
+### 1-2. Private Image Registry에 저장된 이미지 가져오기 (Pull) 
 1. DockerHub와 마찬가지로 Private Image Registry에 저장된 이미지를 가져올 수도 있습니다. (Pull) 
 ~~~
 docker pull mycluster.icp:8500/default/my-spring-boot:0.1
@@ -61,7 +63,7 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 * 본 실습에서는 이미 로컬 머신에 이미지를 받은 상태이므로, 새롭게 이미지를 받지는 않습니다.  
 
 
-### 저장된 이미지 권한 관리하기 
+### 1-3. 저장된 이미지 권한 관리하기 
 1. Private Image Registry에 `user1`로  로그인합니다. `user1`은 `mynamespace` 에만 권한을 가지고 있습니다.  (Username: user1 / Password: admin)
 
 ~~~
@@ -80,7 +82,7 @@ user2는 mynamespace 라는 네임스페이스에 권한이 없기에 해당 네
 그럼 이제 이미지의 범위를 변경해 어느 namespace에서나 사용할 수 있도록 수정해보겠습니다. 
 
 
-### 이미지의 scope 을 `global` 로 변경하기  
+### 1-4. 이미지의 scope 을 `global` 로 변경하기  
 1. 웹 콘솔에 admin 계정으로 접속해 *메뉴 > Management > Images* 클릭 
 
 2. *해당 이미지의 Action 클릭 > Change Scope > global`로 수정 
@@ -96,13 +98,13 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 4. 이번엔 특정 네임스페이스에 속하지 않는 글로벌 scope으로 설정 되어 있으므로 pull 이 가능합니다. 
 ![Alt text](./images/image-mgmt-5.png)
 
-## 저장한 이미지를 사용해 컨테이너 실행하기 
+## 2. 저장한 이미지를 사용해 컨테이너 실행하기 
 - 앞서 저장한 spring 컨테이너 이미지를 사용해 간단한 컨테이너를 Deployment 형태로 실행 
 - Deployment를 접근 가능하도록 하기 위해 Service 를 NodePort로 생성 
 - 편리하게 접근할 수 있도록 Ingress 설정 
 
 
-### 저장된 이미지로 Deloyment 만들기 
+### 2-1. 저장된 이미지로 Deloyment 만들기 
 1. 메뉴 > Workloads > Deployments 클릭
 
 2. 우측 상단의 `Create Deployment` 클릭하여 Deployment 생성 
@@ -118,7 +120,8 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 
 3. Create 버튼 클릭 
 
-### Deployment를 외부로 노출하기 위한 Service 생성 
+### 2-2. Deployment를 외부로 노출하기 위한 Service 생성 
+
 1. 메뉴 > Network Access > Services 클릭 
 2. 우측 상단의 `Create Service` 클릭하여 Service 생성 
 - General 탭에 내용 입력 
@@ -136,10 +139,10 @@ docker pull mycluster.icp:8500/default/my-spring-boot:0.1
 5. Service details 정보에서 Node port 란에 할당된 포트 번호 확인 가능. 해당 포트 번호를 클릭
 
 
-### Ingress 설정하기 
+### 2-3. Ingress 설정하기 
 
 
-## 앞에 실행했던 내용은 Helm 패키지로 묶어 카탈로그에 업로드 하기 
+## 3. 앞에 실행했던 내용은 Helm 패키지로 묶어 카탈로그에 업로드 하기 
 
 
 
