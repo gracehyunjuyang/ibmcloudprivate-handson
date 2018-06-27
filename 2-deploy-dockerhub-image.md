@@ -25,7 +25,7 @@ IBM Cloud Private 에 구성된 Private Image Registry는 DockerHub와 동일한
 ### DockerHub에 있는 Public 이미지를 Private Image Registry에 저장(Push)
 DockerHub 로부터 spring으로 작성된 이미지를 다운로드 후 Private Image Registry에 저장합니다.
 
-1. Spring 이미지를 DockerHub에서 Pull 합니다. 
+1. Spring 이미지를 DockerHub에서 로컬 머신으로  Pull 합니다. 
 [Spring.io/gs-spring-boot-docker 이미지](https://hub.docker.com/r/springio/gs-spring-boot-docker)
 
 ~~~
