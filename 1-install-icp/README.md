@@ -1,5 +1,4 @@
 # IBM Cloud Private 설치 
-본 매뉴얼에서는 IBM Cloud Private을 ICP로 줄여서 칭하겠습니다.
 
 ## IBM Cloud Private CE (Community Edition) 설치하기
 설치 매뉴얼 전문은 [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers_CE.html) 를 참고하시기 바랍니다.
@@ -11,12 +10,12 @@ Step 2부터 시작하시면 됩니다. Step 2 입니다!! :-)
 ### Pre-requisite (구성 완료. SKIP)
 - Node 간 SSH 통신하도록 설정 
 - `/etc/hosts` 파일에 hostname 입력
-- 그 외 포트 설정 등 ICP 설치를 위한 환경 구성
+- 그 외 포트 설정 등 IBM Cloud Private 설치를 위한 환경 구성
 
 
 ### Step 1: Boot Node 에 Docker를 설치하기 (구성 완료. SKIP)
 Boot Node 는 Kubernetes 클러스터를 설치, 업데이트하는 노드로 주로 Master Node와 함께 설치 됩니다. 
-Boot Node 에 Docker를 설치하면 나머지 노드에는 ICP 설치 과정에서 자동으로 Docker가 설치 되므로, Boot Node 에만 Docker를 설치합니다. 
+Boot Node 에 Docker를 설치하면 나머지 노드에는 IBM Cloud Private 설치 과정에서 자동으로 Docker가 설치 되므로, Boot Node 에만 Docker를 설치합니다. 
 
 
 ### Step 2: 설치 환경 셋업하기
@@ -26,7 +25,7 @@ Boot Node 에 Docker를 설치하면 나머지 노드에는 ICP 설치 과정에
  sudo docker pull ibmcom/icp-inception:2.1.0.3
 ```
 
-3. ICP 설정 파일을 저장하기 위한 설치 디렉토리 생성
+3. IBM Cloud Private 설정 파일을 저장하기 위한 설치 디렉토리 생성
  ```
  mkdir /opt/ibm-cloud-private-ce-2.1.0.3;  \
  cd /opt/ibm-cloud-private-ce-2.1.0.3
@@ -79,7 +78,7 @@ sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
 ```
 
 ### Step 3: 클러스터 설치 옵션
-`cluster/config.yaml` 파일 설정을 통해 ICP 설치시 다양한 옵션 부여 
+`cluster/config.yaml` 파일 설정을 통해 IBM Cloud Private 설치시 다양한 옵션 부여 
 
 ```
 vi cluster/config.yaml
@@ -107,12 +106,12 @@ kibana_install: true
  <!--https://asciinema.org/a/ycmWE0uQ06tQXZUA9yTU0eH4H-->
 
 
-## Step 4: ICP 설치 
+## Step 4: IBM Cloud Private 설치 
 1. 설치 디렉토리 내 `cluster` 폴더로 이동 
 ```
 cd ./cluster
 ```
-2. ICP 클러스터 설치 
+2. IBM Cloud Private 클러스터 설치 
 ```
 sudo docker run --net=host -t -e LICENSE=accept \
 -v "$(pwd)":/installer/cluster ibmcom/icp-inception:2.1.0.3 install
@@ -123,7 +122,7 @@ sudo docker run --net=host -t -e LICENSE=accept \
 UI URL is https://master_ip:8443 , default username/password is admin/admin
 ```
 
-여기서 `master_ip`는 ICP master node의 IP 주소로, 실습 환경으로 부여받은 VM 의 IP와 같습니다. 
+여기서 `master_ip`는 IBM Cloud Private master node의 IP 주소로, 실습 환경으로 부여받은 VM 의 IP와 같습니다. 
 
 자, 이제 나만의 Kubernetes 환경이 여러가지 관리 서비스와 함께 설치 되었습니다. 
 UI URL에 접속하여 대시보드를 둘러보세요!
