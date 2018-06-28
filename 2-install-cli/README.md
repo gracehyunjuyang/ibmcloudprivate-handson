@@ -1,17 +1,29 @@
 ## 1. kubectl 설치하기
+
+1. kubectl 설치 
 ```
 docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-inception:2.1.0.3 cp /usr/local/bin/kubectl /data
 ```
 [kubectl 링크](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html)
 
+2. kubectl 설치 확인 
+```
+kubectl -v
+```
 
 ## 2. IBM Cloud Private CLI 설치하기
 
 ### 2-1 IBM Cloud CLI 설치
-1. tar 파일 풀기 
+1. 파일이 있는 폴더로 이동
+~~~
+cd /install
+~~~
+
+2. tar 파일 풀기 
 ```
 tar -xvf IBM_Cloud_CLI_0.7.1_amd64.tar.gz
 ``` 
+
 2. 설치 파일 실행
 ```
 cd Bluemix_CLI/
@@ -62,6 +74,8 @@ mv helm /usr/local/bin
      bx pr login -a https://mycluster.icp:8443 --skip-ssl-validation
      ```
      여기서 `mycluster.icp` 는 곧 Master Node 의 IP주소 입니다.
+    
+    ![Alt image](./images/install-cli-1.png)
     
     
    2. 클러스터 이름 찾기 
