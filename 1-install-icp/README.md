@@ -27,9 +27,9 @@ ifconfig eth1 | sed -n '2s/[^:]*:\([^ ]*\).*/\1/p'
 세션에 들어오시면서 받은신 VM의 hostname을 기억해주세요! 
 
 [완료된 화면]
+
 ![Alt host file](./images/install-icp1.png)
 
-![Alt host file](./images/install-icp5.png)
 
 
 ### Step 1: Boot Node 에 Docker를 설치하기 (구성 완료. SKIP)
@@ -38,7 +38,7 @@ Boot Node 에 Docker를 설치하면 나머지 노드에는 IBM Cloud Private �
 
 
 ### Step 2: 설치 환경 셋업하기
-1. _**Boot Node**에 로그인
+1. **Boot Node**에 로그인
 [실습 시스템 접속 정보 안내 페이지](https://ibmcloudprivate-handson.mybluemix.net/) 에서 Password 정보를 확인하세요. 
 
 2. [Docker Hub](https://hub.docker.com/r/ibmcom/icp-inception/)로부터 IBM Cloud Private-CE 설치 이미지 다운로드.
