@@ -1,3 +1,5 @@
+# CLI  설치하기
+
 ## 1. kubectl 설치하기
 
 1. kubectl 설치 
