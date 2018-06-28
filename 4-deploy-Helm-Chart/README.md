@@ -1,3 +1,6 @@
+# Helm Chart 로 배포 리소스 패키징하기 
+
+
 ## Blue Compute 마이크로서비스를 Helm Chart로 배포하기
 
 Helm Chart를 카탈로그에 추가하는 방법은 크게 두가지입니다. 
@@ -82,7 +85,33 @@ Auth, Catalog, Catalogelasticsearch 등 여러개의 서비스가 Bluecompute �
 Bluecompute 애플리케이션을 여기저기 투어해보세요. 
 각 페이지별로 서로 다른 마이크로서비스가 호출됩니다.  (인증, 카탈로그, 재고 등)
 
-  
+
+
+<!--
+## 커스텀 Helm Chart 만들어 배포하기 
+
+1. Helm Chart를 생성 
+~~~
+helm create my-nginx
+~~~
+
+2. 생성한 `my-nginx` Chart 는 이런 트리 구조로 되어 있습니다. 
+
+my-nginx/
+├── charts
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   ├── _helpers.tpl
+│   ├── ingress.yaml
+│   ├── NOTES.txt
+│   └── service.yaml
+└── values.yaml
+
+_Chart 템플릿에 대해 자세히 알고 싶다면 [Helm Chart Template Getting Started](https://github.com/kubernetes/helm/blob/master/docs/chart_template_guide/getting_started.md) 클릭_
+
+3. 
+-->
 
 
 
