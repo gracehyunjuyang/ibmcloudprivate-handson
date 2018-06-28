@@ -6,10 +6,30 @@
 
 
 ### Pre-requisite 
-1. `/etc/hosts` 파일에 hostname 입력
-**hostname**은 vm00[N] 입니다. 
-저는 vm001 이 hostname 입니다. 
+`Host` 파일 수정하기 
+~~~
+vi /etc/hosts
+~~~
+
+1. 할당받은 VM의 IP 주소를 확인합니다. 
+~~~
+ifconfig eth1 | sed -n '2s/[^:]*:\([^ ]*\).*/\1/p'
+~~~
+![Alt host file](./images/install-icp4.png)
+
+
+2. 아래와 같이 있는 두개의 라인을 삭제
+`127.0.0.1       vm001.ibmcloud.arcy.me  vm001`
+`127.0.1.1       vm001.ibmcloud.arcy.me  vm001` 
+
+3. hostname과 IP를 추가합니다. 
+**hostname**은 vm00[N] 입니다. 예를 들어, 저는 _**vm001**_ 이 hostname 입니다. 
 세션에 들어오시면서 받은신 VM의 hostname을 기억해주세요! 
+
+[완료된 화면]
+![Alt host file](./images/install-icp1.png)
+
+![Alt host file](./images/install-icp5.png)
 
 
 ### Step 1: Boot Node 에 Docker를 설치하기 (구성 완료. SKIP)
@@ -53,11 +73,11 @@ sudo docker pull ibmcom/icp-inception:2.1.0.3
 
  7. `/opt/ibm-cloud-private-ce-2.1.0.3/cluster/hosts` 파일에 노드의 IP 주소 입력
  ```
- vi cluster/hosts
+ vi /opt/ibm-cloud-private-ce-2.1.0.3/cluster/hosts
  ``` 
 
  hosts 파일을 수정합니다. 
- 아래 `169.56.89.226` 자리에 각자 받으신 VM 의 IP를 입력하시면 됩니다. 
+ `169.56.89.226` 대신 각자 받으신 VM 의 IP를 입력하시면 됩니다. 
  
 ```
 [master]
@@ -78,14 +98,14 @@ sudo docker pull ibmcom/icp-inception:2.1.0.3
 
 7. 클러스터 노드간 통신에 SSH 키를 사용하기 위해 `/opt/cluster` 폴더에 `ssh_key` 파일을 덮어씁니다. 
 ```
-sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
+sudo cp ~/.ssh/id_rsa /opt/ibm-cloud-private-ce-2.1.0.3/cluster/ssh_key
 ```
 
 ### Step 3: 클러스터 설치 옵션
 `cluster/config.yaml` 파일 설정을 통해 IBM Cloud Private 설치시 다양한 옵션 부여 
 
 ```
-vi cluster/config.yaml
+vi /opt/ibm-cloud-private-ce-2.1.0.3/cluster/config.yaml
 ```
 
 1. 모니터링, 미터링 서비스는 default 로 설치하도록 명시 되어 있습니다. 만약 metering, monitoring 등의 서비스를 설치하지 않고자 할 때는 아래 `disabled_management_services` 값에 추가할 수 있습니다. 본 튜토리얼에서는 기본적인 관리 서비스 (metering, monitoring, service catalog)를 모두 설치합니다. Microservice mesh 인 Istio 도 함께 설치할 수 있습니다. 
@@ -94,6 +114,7 @@ vi cluster/config.yaml
 ## You can disable the following management services: ["service-catalog", "metering", "monitoring", "istio", "vulnerability-advisor", "custom-metrics-adapter"]
 disabled_management_services: ["istio", "vulnerability-advisor", "custom-metrics-adapter"]
 ```
+![Alt](./images/install-icp2.png)
 
 2. 로깅 서비스 활성화 
 ``` 
@@ -106,6 +127,9 @@ disabled_management_services: ["istio", "vulnerability-advisor", "custom-metrics
 kibana_install: true
 ``` 
 
+![Alt](./images/install-icp3.png)
+
+
 3. 그 외에도 Ansible 설치 스크립트 실행시 다양한 옵션을 명시할 수 있습니다. 자세한 옵션은 [Config.yaml 파일로 클러스터 커스터마이즈 하기](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/config_yaml.html) 를 참고하시기 바랍니다. 
  <!--https://asciinema.org/a/ycmWE0uQ06tQXZUA9yTU0eH4H-->
 
@@ -113,7 +137,7 @@ kibana_install: true
 ## Step 4: IBM Cloud Private 설치 
 1. 설치 디렉토리 내 `cluster` 폴더로 이동 
 ```
-cd ./cluster
+cd /opt/ibm-cloud-private-ce-2.1.0.3/cluster
 ```
 2. IBM Cloud Private 클러스터 설치 
 ```
