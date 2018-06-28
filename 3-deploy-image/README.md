@@ -154,5 +154,5 @@ _**http://[proxy-node-ip]:NODE_PORT**_ 형태로 접속하게 됩니다.
 5. 이제 _**https://[proxy-node-ip]/hello-nginx**_ 를 주소창에 입력합니다. 
 ![Alt nginx service](./images/image-nginx-8.png)
 
-이렇게 Ingress 설정을 통해 `proxy_ip:node_port`대신 `proxy_ip/path` 형식으로 path를 지정할 있습니다. 
+이렇게 Ingress 설정을 통해 `proxy_ip:node_port`대신 `proxy_ip/path` 형식으로 path를 지정할 수 있습니다. 
 
