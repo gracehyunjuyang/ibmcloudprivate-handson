@@ -7,10 +7,9 @@
 실습 시간 단축을 위해 Step 1 까지는 모두 구성 완료하였습니다. 
 Step 2부터 시작하시면 됩니다. Step 2 입니다!! :-)
 
-### Pre-requisite (구성 완료. SKIP)
-- Node 간 SSH 통신하도록 설정 
-- `/etc/hosts` 파일에 hostname 입력
-- 그 외 포트 설정 등 IBM Cloud Private 설치를 위한 환경 구성
+### Pre-requisite 
+1. `/etc/hosts` 파일에 hostname 입력
+**hostname**은 vm00X 입니다. 저는 vm001 이 hostname 입니다. 
 
 
 ### Step 1: Boot Node 에 Docker를 설치하기 (구성 완료. SKIP)
@@ -55,7 +54,7 @@ Boot Node 에 Docker를 설치하면 나머지 노드에는 IBM Cloud Private �
  ``` 
 
  hosts 파일 수정
- ```
+```
 [master]
 169.56.89.226
 
