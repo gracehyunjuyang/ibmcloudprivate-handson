@@ -87,6 +87,30 @@ Bluecompute 애플리케이션을 여기저기 투어해보세요.
 
 
 
+## 외부 오픈 Helm Chart를 카탈로그에 등록하기 
+
+이제는 오픈소스의 세상! Helm Chart의 가장 큰 장점이기도 합니다. 
+Kubernetes 환경에서 사용할 수 있는 다양한 패키지가 이미 GitHub에 많이 올라와 있는데요, 
+대표적으로 [Kubernetes Stable Chart](https://github.com/kubernetes/charts/tree/master/stable) 와 [Kubernetes Incubator Chart](https://github.com/kubernetes/charts/tree/master/incubator) 를 많이 사용합니다. 
+
+이 외부 repository를 추가해봅니다. 
+
+1. _**메뉴 > Manage > Helm repositories**_ 선택 
+2. 우측 상단의 _**Add respositories**_ 선택
+3. 아래와 같이 값을 입력 후 _**Add**_ 클릭 
+- Name : kubernetes-stable
+- URL : https://kubernetes-charts.storage.googleapis.com/ 
+
+4. 우측 상단의 **Sync Respositories** 클릭하여 카탈로그 동기화 
+5. 이제 _**카탈로그**_로 이동하면 다양한 서비스가 추가된 것을 볼 수 있습니다. 
+
+이렇게 오픈소스 서비스를 Kubernetes 상에서 마음껏 사용할 수 있습니다. 
+
+직접 패키징한 Helm Chart를 카탈로그에 올리는 방법은 시간 관계상 이번 실습에서는 다루지 않습니다. 
+아래 링크를 참고하세요. 
+
+[나만의 Helm Chart 작성하기](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/app_center/add_package.html) 
+
 <!--
 ## 커스텀 Helm Chart 만들어 배포하기 
 
