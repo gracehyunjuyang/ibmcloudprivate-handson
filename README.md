@@ -26,7 +26,7 @@ Kubernetes 자원 배포 관리 및 그 외 온프레미스에서 고려해야 �
 1. Monitoring (Prometheus & Grafana) 
 2. LDAP 연계를 통한 사용자 / 멀티 테넌트 관리
 3. 컨테이너 이미지와 실행 중인 컨테이너 보안 관리 
-4. 멀티 클라우드 관리 
+<!-- 4. 멀티 클라우드 관리 -->
 
 ### 핸즈온 세션 노트
 http://ibm.biz/icpopen
